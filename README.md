@@ -131,7 +131,7 @@ python -m venv .venv
 
 ### Github actions
 
-See my GH actions [`bumper.yaml` workflow](.github/workflows/bumper.yaml). Replace `pip install .` with `pip install pumper==0.1.0` (line 31).
+See my GH actions [`bumper.yaml` workflow](.github/workflows/bumper.yaml). Replace `pip install .` with `pip install pumper==0.1.1` (line 31).
 
 #### Required setup
 
