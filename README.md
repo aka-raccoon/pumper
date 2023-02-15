@@ -111,22 +111,27 @@ python -m venv .venv
 
  Merge pull request.
 
-╭─ Arguments ────────────────────────────────────────────────────────────────────╮
-│ *    pr_num      INTEGER  PR number. [env var: PR_NUM] [default: None]         │
-│                           [required]                                           │
-╰────────────────────────────────────────────────────────────────────────────────╯
-╭─ Options ──────────────────────────────────────────────────────────────────────╮
-│ *  --repo         TEXT  The owner and repository name, eg 'owner/repo'.        │
-│                         [env var: GITHUB_REPOSITORY]                           │
-│                         [default: None]                                        │
-│                         [required]                                             │
-│    --url          TEXT  Github API url.                                        │
-│                         [env var: GITHUB_API_URL]                              │
-│                         [default: https://api.github.com]                      │
-│ *  --token        TEXT  Github token. [env var: GITHUB_TOKEN] [default: None]  │
-│                         [required]                                             │
-│    --help               Show this message and exit.                            │
-╰────────────────────────────────────────────────────────────────────────────────╯
+╭─ Arguments ───────────────────────────────────────────────────────────────────╮
+│ *    pr_num      INTEGER  PR number. [env var: PR_NUM] [default: None]        │
+│                           [required]                                          │
+╰───────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ─────────────────────────────────────────────────────────────────────╮
+│    --method        [merge|squash|rebase]  The merge method to use.            │
+│                                           [default: merge]                    │
+│ *  --repo          TEXT                   The owner and repository name, eg   │
+│                                           'owner/repo'.                       │
+│                                           [env var: GITHUB_REPOSITORY]        │
+│                                           [default: None]                     │
+│                                           [required]                          │
+│    --url           TEXT                   Github API url.                     │
+│                                           [env var: GITHUB_API_URL]           │
+│                                           [default: https://api.github.com]   │
+│ *  --token         TEXT                   Github token.                       │
+│                                           [env var: GITHUB_TOKEN]             │
+│                                           [default: None]                     │
+│                                           [required]                          │
+│    --help                                 Show this message and exit.         │
+╰───────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ### Github actions
@@ -145,7 +150,7 @@ See my GH actions [`bumper.yaml` workflow](.github/workflows/bumper.yaml). Repla
           contents: write
         ```
 
-    - Github personal access tokens (classic) needs  `repo` scope.
+    - Github personal access tokens (classic) needs `public_repo` scope for public repositories or full `repo` scope for a private repositories.
 
 ## Appreciation
 

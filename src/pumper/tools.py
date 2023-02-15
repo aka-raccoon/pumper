@@ -1,5 +1,6 @@
 import re
 import sys
+from enum import Enum
 from typing import Optional
 
 from pumper.command import Command, execute
@@ -68,3 +69,9 @@ class Cz(Tool):
 def format_changelog(text: str) -> str:
     git_output = r".*\n \d+ files changed, \d+ insertions\(\+\), \d+ deletions\(\-\)"
     return re.sub(git_output, "", text)
+
+
+class MergeMethod(str, Enum):
+    MERGE = "merge"
+    SQUASH = "squash"
+    REBASE = "rebase"
