@@ -23,7 +23,7 @@ This raises following concerns (among others) in highly secured environments:
 - branch protection rules needs to be relieved
 - change in main branch is not reviewed
 
-Bump strategy with `pumper`:
+**Bump strategy with `pumper`:**
 
 ![pumper-strategy](docs/pumper-strategy.excalidraw.png)
 
@@ -131,18 +131,21 @@ python -m venv .venv
 
 ### Github actions
 
-See my GH actions [`bumper.yaml` workflow](.github/workflows/bumper.yaml).
+See my GH actions [`bumper.yaml` workflow](.github/workflows/bumper.yaml). Replace `pip install .` with `pip install pumper==0.1.0` (line 31).
 
 #### Required setup
 
-- [allow GitHub Actions to create and approve pull requests](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#preventing-github-actions-from-creating-or-approving-pull-requests) in your repository settings
-- add following [permissions to `GITHUB_TOKEN`](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token):
+- [Allow GitHub Actions to create and approve pull requests](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#preventing-github-actions-from-creating-or-approving-pull-requests) in your repository settings.
+- Depending on which token you want to use:
+    - Actions [`GITHUB_TOKEN` needs following permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token):
 
-    ```yaml
-    permissions:
-        pull-requests: write
-        contents: write
-    ```
+        ```yaml
+        permissions:
+          pull-requests: write
+          contents: write
+        ```
+
+    - Github personal access tokens (classic) needs  `repo` scope.
 
 ## Appreciation
 

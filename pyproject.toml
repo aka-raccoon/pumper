@@ -101,7 +101,7 @@ markers = [
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.1.0"
-version_files = ["pyproject.toml:^version"]
+version_files = ["pyproject.toml:^version", "README.md:pumper=="]
 tag_format = "$version"
 bump_message = "bump: $current_version → $new_version"
 
