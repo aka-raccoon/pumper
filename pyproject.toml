@@ -1,0 +1,113 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pumper"
+version = "0.0.1"
+description = "Automatically create a PR, bump version (using Commitizen), approve and merge (suitable for CI/CD)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE.txt" }
+keywords = ["commitizen", "bump", "gh actions", "ci/cd"]
+authors = [{ name = "aka-raccoon", email = "aka-raccoon@pm.me" }]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = ["commitizen<=2.42.0", "typer[all]<=0.7.0", "PyGithub<=1.57"]
+
+[project.urls]
+Documentation = "https://github.com/aka-raccoon/pumper#readme"
+Issues = "https://github.com/aka-raccoon/pumper/issues"
+Source = "https://github.com/aka-raccoon/pumper"
+
+[project.optional-dependencies]
+dev = ["isort", "black", "pylint", "mypy", "bandit[toml]"]
+test = ["coverage", "pytest", "pytest-cov", "pytest-mock"]
+
+[project.scripts]
+pumper = "pumper.main:app"
+
+[tool.hatch.envs.default]
+features = ["dev", "test"]
+[tool.hatch.envs.default.scripts]
+check = [
+  "pylint src/",
+  "black --check --diff src/",
+  "isort --check-only --diff src/",
+  "mypy src/",
+  "bandit -r --configfile pyproject.toml src/",
+]
+fix = ["black src/", "isort src/"]
+
+[tool.hatch.envs.test]
+features = ["test"]
+
+[tool.hatch.envs.test.scripts]
+unit = "pytest -m 'not integration' --cov"
+integration = "pytest -m 'integration'"
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pylint.messages_control]
+disable = [
+  "missing-module-docstring",
+  "missing-class-docstring",
+  "missing-function-docstring",
+]
+
+[tool.pylint.format]
+max-line-length = 100
+good-names = ["pr", "gh", "cz", "rc"]
+
+[tool.black]
+line-length = 100
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["pumper"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+
+[tool.mypy]
+namespace_packages = true
+ignore_missing_imports = true
+explicit_package_bases = true
+warn_return_any = false
+warn_unused_configs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_column_numbers = true
+show_error_codes = true
+show_error_context = true
+
+[tool.pytest.ini_options]
+markers = [
+  "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+  "integration: marks integration tests (deselect with '-m \"not integration\"')",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+version_files = ["pyproject.toml:^version"]
+tag_format = "$version"
+bump_message = "bump: $current_version → $new_version"
+
+[tool.bandit]
+exclude_dirs = ["tests/"]
+
+[tool.hatch.build]
+exclude = [".github", "tests", ".editorconfig", "docs"]
+sources = ["src"]
