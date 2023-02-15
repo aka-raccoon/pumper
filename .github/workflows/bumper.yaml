@@ -32,10 +32,10 @@ jobs:
       - name: Create PR 🥘
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pumper create --gh-env --assign
+        run: pumper create --gh-env --assign --label bump
       - name: Merge PR ✅
         env:
           GITHUB_TOKEN: ${{ secrets.PUMPER }}
         run: |
           pumper approve
-          pumper merge
+          pumper merge --method rebase
