@@ -74,7 +74,7 @@ def create(  # pylint: disable=too-many-arguments,too-many-locals
     git.remove_local_tags()
     if gh_env:
         env_file = Path(environ["GITHUB_ENV"])
-        logger.info("saving PR number to file %s", env_file)
+        logger.info("saving PR number to $GITHUB_ENV")
         with env_file.open("a", encoding="utf-8") as file:
             file.write(f"PR_NUM={pr.number}")
 
