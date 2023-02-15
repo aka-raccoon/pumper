@@ -7,7 +7,7 @@ from github import Github
 from typer import Argument, Option, Typer
 
 from pumper.logging import logger
-from pumper.tools import GH_URL, Cz, Git
+from pumper.tools import GH_URL, Cz, Git, MergeMethod
 
 app = Typer(
     name="pumper",
@@ -99,6 +99,7 @@ def approve(
 @app.command()
 def merge(
     pr_num: int = Argument(..., envvar="PR_NUM", help="PR number."),
+    method: MergeMethod = Option("merge", help="The merge method to use."),
     repo: str = Option(
         ..., envvar="GITHUB_REPOSITORY", help="The owner and repository name, eg 'owner/repo'."
     ),
@@ -108,7 +109,7 @@ def merge(
     """Merge pull request."""
     logger.info("merging PR %i", pr_num)
     pr = Github(base_url=url, login_or_token=token).get_repo(repo).get_pull(pr_num)
-    pr.merge()
+    pr.merge(merge_method=method)
 
 
 if __name__ == "__main__":
