@@ -56,7 +56,7 @@ def create(  # pylint: disable=too-many-arguments,too-many-locals
         logger.warning("No bump!")
         exit(0)
 
-    branch = branch.format(version=version)
+    branch = branch.format(version=new_version)
     git.create_branch(name=branch)
 
     gh = Github(base_url=url, login_or_token=token)
