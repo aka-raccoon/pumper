@@ -50,7 +50,7 @@ def create(  # pylint: disable=too-many-arguments,too-many-locals
     no_increment = rc == 21
     if no_increment:
         logger.error(error)
-        exit(1)
+        exit(0)
     new_version = cz.get_version()
     if version == new_version:
         logger.warning("No bump!")
