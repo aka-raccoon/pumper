@@ -29,7 +29,7 @@ def create(  # pylint: disable=too-many-arguments,too-many-locals
     email: str = Option("github-actions[bot]@users.noreply.github.com", help="Git user email."),
     gh_env: bool = Option(False, "--gh-env", help="Create 'PR_NUM' env var for GH actions"),
     label: Optional[list[str]] = Option(None, help="Add labels to PR."),
-    assign: bool = Option(True, "--assign", help="Assign PR"),
+    assign: bool = Option(False, "--assign", help="Assign PR"),
     assignee: str = Option("", envvar="GITHUB_ACTOR", help="PR assignee name."),
 ):
     """Bump version, push branch and create pull request."""
