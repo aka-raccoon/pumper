@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pumper"
-version = "0.0.1"
+version = "0.1.0"
 description = "Automatically create a PR, bump version (using Commitizen), approve and merge (suitable for CI/CD)."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -100,7 +100,7 @@ markers = [
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.1"
+version = "0.1.0"
 version_files = ["pyproject.toml:^version"]
 tag_format = "$version"
 bump_message = "bump: $current_version → $new_version"
